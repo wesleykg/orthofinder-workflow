@@ -1,5 +1,7 @@
 from Bio import SeqIO
 
-index = SeqIO.index("At-atpD_orthofinder.fna", "fasta")
+atpD_index = SeqIO.index("At-atpD_orthofinder.fna", "fasta")
 
-def
+ids_1kp = open("ids_1kp.txt", 'r')
+wanted_species = ids_1kp.readlines()
+ids_1kp.close()
