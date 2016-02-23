@@ -14,4 +14,10 @@ with open(ids_1kp, 'r') as ids: #Open the file
 
 ##Loop through orthofinder data and retrieve records that match wanted_ids
 
+for record in SeqIO.parse(orthofinder_data, 'fasta'):
+    for ID in wanted_ids:
+        if ID in record.id:
+            print record.id
+            
+
 
