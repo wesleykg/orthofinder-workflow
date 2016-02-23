@@ -25,9 +25,7 @@ unique_records = []
 checksum_container = []
 for record in wanted_records:
     checksum = seguid(record.seq)
-    if checksum in checksum_container:
-        print record.id
-    elif checksum not in checksum_container:
+    if checksum not in checksum_container:
         checksum_container.append(checksum)
         unique_records.append(record)
 
