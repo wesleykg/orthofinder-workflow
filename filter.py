@@ -1,5 +1,5 @@
 from Bio import SeqIO
-#from Bio.SeqRecord import SeqRecord
+from Bio.SeqUtils.CheckSum import seguid
 
 ids_1kp = 'ids_1kp.txt'
 orthofinder_file = "At-atpD_orthofinder.fna"
@@ -14,12 +14,23 @@ with open(ids_1kp, 'r') as ids: #Open the file
         wanted_ids.append(ID.rstrip()) #Remove newline characters
 
 ##Loop through orthofinder data and retrieve records that match wanted_ids
-orthofinder_data = SeqIO.parse(orthofinder_file, 'fasta')
 wanted_records = []
-for record in orthofinder_data:
+for record in SeqIO.parse(orthofinder_file, 'fasta'):
     for ID in wanted_ids:
         if ID in record.id:
             wanted_records.append(record)
 
-SeqIO.write(wanted_records, 'filtered_orthofinder.fasta', 'fasta')
+##Loop through wanted records and create a list containing unique sequence
+unique_records = []
+checksum_container = []
+for record in wanted_records:
+    checksum = seguid(record.seq)
+    if checksum in checksum_container:
+        print record.id
+    elif checksum not in checksum_container:
+        checksum_container.append(checksum)
+        unique_records.append(record)
+
+##Write filtered records to file
+SeqIO.write(unique_records, 'filtered_orthofinder.fasta', 'fasta')
 
