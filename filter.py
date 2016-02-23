@@ -1,7 +1,8 @@
 from Bio import SeqIO
+#from Bio.SeqRecord import SeqRecord
 
 ids_1kp = 'ids_1kp.txt'
-orthofinder_data = "At-atpD_orthofinder.fna"
+orthofinder_file = "At-atpD_orthofinder.fna"
 
 ##############################################################################
 
@@ -13,11 +14,12 @@ with open(ids_1kp, 'r') as ids: #Open the file
         wanted_ids.append(ID.rstrip()) #Remove newline characters
 
 ##Loop through orthofinder data and retrieve records that match wanted_ids
-
-for record in SeqIO.parse(orthofinder_data, 'fasta'):
+orthofinder_data = SeqIO.parse(orthofinder_file, 'fasta')
+wanted_records = []
+for record in orthofinder_data:
     for ID in wanted_ids:
         if ID in record.id:
-            print record.id
-            
+            wanted_records.append(record)
 
+SeqIO.write(wanted_records, 'filtered_orthofinder.fasta', 'fasta')
 
