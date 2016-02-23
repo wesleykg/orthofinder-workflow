@@ -1,16 +1,15 @@
 from Bio import SeqIO
 
-def name_trunc(record):
-    ID = record.id.split()
-    return ID
-    
-atpD_index = SeqIO.index("At-atpD_orthofinder.fna", "fasta")
+ids_1kp = 'ids_1kp.txt'
+orthofinder_data = "At-atpD_orthofinder.fna"
 
-atpD_index.name()
+##############################################################################
 
-ids_1kp = open("ids_1kp.txt", 'r')
-wanted_species = ids_1kp.readlines()
-ids_1kp.close()
+atpD_index = SeqIO.index(orthofinder_data, "fasta")
 
-#for id in atpD_index:
-    
+##Produce a list of 1kp IDs
+wanted_ids = [] #Initialize the list
+with open(ids_1kp, 'r') as ids: #Open the file
+    wanted_ids_temp = ids.readlines() #Read in the file
+    for ID in wanted_ids_temp: 
+        wanted_ids.append(ID.rstrip()) #Remove newline characters
