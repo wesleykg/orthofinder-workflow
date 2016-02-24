@@ -1,15 +1,15 @@
 from Bio import SeqIO #For reading orthgroup data
 from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
-ids_1kp = 'ids_1kp.txt' #The file containing 1kp IDs of wanted species
-orthogroup_file = "At-atpD_orthofinder.fna" # The file produced by orthofinder
+ids_1kp_file = 'wanted_species.txt' #The file containing 1kp IDs of wanted species
+orthogroup_file = "AT4G09650_4729.fna" # The file produced by orthofinder
 
-def transcript_filter(ids_1kp, orthogroup_file):
-    '''Docstring goes here'''
+def transcript_filter(orthgroup_file, ids_1kp_file):
+    '''Filter out transcripts in orthgroup data by species ID'''
     
     ##Read in list of 1kp IDs of wanted species
     wanted_ids = [] #Initialize list of IDs
-    with open(ids_1kp, 'r') as ids: #Open the file for reading
+    with open(ids_1kp_file, 'r') as ids: #Open the file for reading
         wanted_ids_temp = ids.readlines() #Read in the file with newline chars
         for ID in wanted_ids_temp: #Loops through each ID
             wanted_ids.append(ID.rstrip()) #Remove newline chars
@@ -36,4 +36,4 @@ def transcript_filter(ids_1kp, orthogroup_file):
     return SeqIO.write(unique_records, 'filtered_orthofinder.fasta', 'fasta')
 
 if __name__ == '__main__':
-    transcript_filter(ids_1kp, orthogroup_file)
+    transcript_filter(1ds_1kp_file, orthogroup_file)
