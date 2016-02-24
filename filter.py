@@ -1,37 +1,39 @@
-from Bio import SeqIO
-from Bio.SeqUtils.CheckSum import seguid
+from Bio import SeqIO #For reading orthgroup data
+from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
-ids_1kp = 'ids_1kp.txt'
-orthofinder_file = "At-atpD_orthofinder.fna"
+ids_1kp = 'ids_1kp.txt' #The file containing 1kp IDs of wanted species
+orthogroup_file = "At-atpD_orthofinder.fna" # The file produced by orthofinder
 
-##############################################################################
-
-def filterer(ids_1kp, orthofinder_file):
-    ##Produce a list of 1kp IDs
-    wanted_ids = [] #Initialize the list
-    with open(ids_1kp, 'r') as ids: #Open the file
-        wanted_ids_temp = ids.readlines() #Read in the file
-        for ID in wanted_ids_temp: 
-            wanted_ids.append(ID.rstrip()) #Remove newline characters
+def transcript_filter(ids_1kp, orthogroup_file):
+    '''Docstring goes here'''
     
-    ##Loop through orthofinder data and retrieve records that match wanted_ids
-    matching_records = []
-    for record in SeqIO.parse(orthofinder_file, 'fasta'):
-        for ID in wanted_ids:
-            if ID in record.id:
-                matching_records.append(record)
+    ##Read in list of 1kp IDs of wanted species
+    wanted_ids = [] #Initialize list of IDs
+    with open(ids_1kp, 'r') as ids: #Open the file for reading
+        wanted_ids_temp = ids.readlines() #Read in the file with newline chars
+        for ID in wanted_ids_temp: #Loops through each ID
+            wanted_ids.append(ID.rstrip()) #Remove newline chars
     
-    ##Loop through wanted records and create a list containing unique sequence
-    unique_records = []
-    checksum_container = []
-    for record in matching_records:
-        checksum = seguid(record.seq)
-        if checksum not in checksum_container:
-            checksum_container.append(checksum)
-            unique_records.append(record)
+    ##Retrieve records in orthgroup of wanted species only
+    matching_records = [] #Initialize list of records
+    for record in SeqIO.parse(orthogroup_file, 'fasta'): #Open the file
+        for ID in wanted_ids: #Loop through each species ID
+            if ID in record.id: #The '.id' returns the names of records
+                matching_records.append(record) #Add record to list
     
-    ##Write filtered records to file
+    ##Create a new list of orthogroup genes without duplicate sequences
+    unique_records = [] #Initialize list of unique records
+    checksum_container = [] #Initialize list of unique 
+                            #identifiers for each gene
+    for record in matching_records: #Loop through each record
+        checksum = seguid(record.seq) #Create a unique identifier for only
+                                      #the sequence of the record
+        if checksum not in checksum_container: #Duplicate seqeunce can't pass
+            checksum_container.append(checksum) #Add unique identifier to list
+            unique_records.append(record) #Add record to list
+    
+    ##Write records to file
     return SeqIO.write(unique_records, 'filtered_orthofinder.fasta', 'fasta')
 
 if __name__ == '__main__':
-    filterer(ids_1kp, orthofinder_file)
+    transcript_filter(ids_1kp, orthogroup_file)
