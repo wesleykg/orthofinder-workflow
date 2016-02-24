@@ -6,7 +6,7 @@ orthofinder_file = "At-atpD_orthofinder.fna"
 
 ##############################################################################
 
-def filter(ids_1kp, orthofinder_file):
+def filterer(ids_1kp, orthofinder_file):
     ##Produce a list of 1kp IDs
     wanted_ids = [] #Initialize the list
     with open(ids_1kp, 'r') as ids: #Open the file
@@ -33,3 +33,5 @@ def filter(ids_1kp, orthofinder_file):
     ##Write filtered records to file
     return SeqIO.write(unique_records, 'filtered_orthofinder.fasta', 'fasta')
 
+if __name__ == '__main__':
+    filterer(ids_1kp, orthofinder_file)
