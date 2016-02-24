@@ -8,6 +8,8 @@ clean:
 
 %-aligned.fasta : %-filtered.fasta
 	python align.py $^
+	aliview $@
+
 
 .PHONY: all clean
 .DELETE_ON_ERROR:
