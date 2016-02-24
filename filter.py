@@ -1,3 +1,4 @@
+from docopt import docopt #For command-line arguments
 from Bio import SeqIO #For reading orthgroup data
 from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
