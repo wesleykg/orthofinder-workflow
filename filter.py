@@ -37,4 +37,4 @@ def transcript_filter(orthgroup_file, ids_1kp_file):
     return SeqIO.write(unique_records, 'filtered_orthofinder.fasta', 'fasta')
 
 if __name__ == '__main__':
-    transcript_filter(1ds_1kp_file, orthogroup_file)
+    transcript_filter(ids_1kp_file, orthogroup_file)
