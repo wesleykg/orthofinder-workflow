@@ -1,4 +1,5 @@
 from docopt import docopt #For command-line arguments
+from os import path #For creating output filename from input
 from Bio import SeqIO #For reading orthgroup data
 from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
