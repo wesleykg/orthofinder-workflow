@@ -2,7 +2,7 @@ from docopt import docopt #For command-line arguments
 from Bio import SeqIO #For reading orthgroup data
 from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
-ids_1kp_file = 'wanted_species.txt' #The file containing 1kp IDs of wanted species
+ids_1kp_file = 'wanted_species.txt' #The file containing wanted 1kp IDs
 orthogroup_file = "AT4G09650_4729.fna" # The file produced by orthofinder
 
 def transcript_filter(orthgroup_file, ids_1kp_file):
