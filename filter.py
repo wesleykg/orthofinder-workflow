@@ -19,7 +19,7 @@ def filter_by_id(orthgroup_file, ids_1kp_file):
             wanted_ids.append(ID.rstrip()) #Remove newline chars
     
     ##Retrieve records in orthgroup of wanted species only
-    global matching_records 
+    global matching_records
     matching_records = [] #Initialize list of records
     
     for record in SeqIO.parse(orthogroup_file, 'fasta'): #Open the file
