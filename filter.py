@@ -3,7 +3,6 @@
 from docopt import docopt #For command-line arguments
 import os #For creating output filename from input
 from Bio import SeqIO #For reading orthgroup data
-from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
 cmdln_args = docopt(__doc__) #Creates a dictionary of command-line arguments
 
@@ -26,36 +25,16 @@ def filter_by_id(orthgroup_file, ids_1kp_file):
             wanted_ids.append(ID.rstrip()) #Remove newline chars
     
     ##Retrieve records in orthgroup of wanted species only
-    global matching_records
     matching_records = [] #Initialize list of records
     
     for record in SeqIO.parse(orthogroup_file, 'fasta'): #Open the file
-        for ID in wanted_ids: #Loop through each species ID
+        for ID in wanted_ids: #Loop through each wanted species ID
             if ID in record.id: #The '.id' method returns the names of records
                 matching_records.append(record) #Add record to list
     
-    return matching_records
-    
-def duplicate_remover(matching_records):
-    '''Return a list of orthogroup genes without duplicate sequences'''
-    global unique_records #Make unique_records exist outside function
-    unique_records = [] #Initialize list of unique records
-    checksum_container = [] #Initialize list of unique 
-                            #identifiers for each gene
-    for record in matching_records: #Loop through each record
-        checksum = seguid(record.seq) #Create a unique identifier for only
-                                      #the sequence of the record
-        if checksum not in checksum_container: #Duplicate seqeunce can't pass
-            checksum_container.append(checksum) #Add unique identifier to list
-            unique_records.append(record) #Add record to list
-    
-    return unique_records
-
-def file_writer(unique_records):
-    '''Write records to file'''
-    SeqIO.write(unique_records, orthogroup_name + '_filtered.fasta', 'fasta')
-
+    SeqIO.write(matching_records, 
+                orthogroup_name + '_filtered.fasta', 
+                'fasta')
+      
 if __name__ == '__main__':
     filter_by_id(orthogroup_file, ids_1kp_file)
-    duplicate_remover(matching_records)
-    file_writer(unique_records)
