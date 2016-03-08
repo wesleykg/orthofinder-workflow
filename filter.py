@@ -1,4 +1,4 @@
-"""Usage: filter.py <orthogroup> <wanted_species>"""
+'''Usage: filter.py <orthogroup> <wanted_species>'''
 
 from docopt import docopt #For command-line arguments
 import os #For creating output filename from input
@@ -6,10 +6,12 @@ from Bio import SeqIO #For reading orthgroup data
 from Bio.SeqUtils.CheckSum import seguid #For identifying unique sequences
 
 cmdln_args = docopt(__doc__) #Creates a dictionary of command-line arguments
-print(cmdln_args)
 
-orthogroup_file = "AT4G09650_4729.fna" #The file produced by orthofinder
-ids_1kp_file = 'wanted_species.txt' #The file containing wanted 1kp IDs
+orthogroup_file = cmdln_args.get('<orthogroup>')    #The file produced 
+                                                    #by orthofinder
+ids_1kp_file = cmdln_args.get('<wanted_species>')   #The file containing 
+                                                    #wanted 1kp IDs
+
 orthogroup_name = os.path.splitext(orthogroup_file)[0] #Drop the filename
 
 def filter_by_id(orthgroup_file, ids_1kp_file):
