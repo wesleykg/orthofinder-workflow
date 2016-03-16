@@ -30,10 +30,11 @@ def filter_by_id(orthgroup_file, wanted_species_file):
             if ID in record.id:
                 matching_records.append(record)
     
-    orthogroup_name = os.path.splitext(orthogroup_file)[0] # Drop the filename
-    SeqIO.write(matching_records,
-                orthogroup_name + '_filtered.fasta', 
-                'fasta')
+    # Write matching_records to file using the original filename and appending
+    # _filtered.fasta to the end
+    orthogroup_name = os.path.splitext(orthogroup_file)[0]
+    SeqIO.write(matching_records, orthogroup_name + '_filtered.fasta', 
+                format = 'fasta')
       
 if __name__ == '__main__':
     filter_by_id(orthogroup_file, wanted_species_file)
