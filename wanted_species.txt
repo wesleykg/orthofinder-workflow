@@ -59,8 +59,8 @@ TOXE-Welwitschia_mirabilis
 PQTO-Lycopodium_deuterodensum
 PKOX-Isoetes_tegetiformans
 LGDQ-Selaginella_apoda
-JVSZ-Equisetum_hymale/
-NHCM-Angiopteris_evecta/
+JVSZ-Equisetum_hymale
+NHCM-Angiopteris_evecta
 BEGM-Botrypus_virginianus
 QVMR-Psilotum_nudum
-WCLG-Adiantum_aleuticum/
+WCLG-Adiantum_aleuticum
