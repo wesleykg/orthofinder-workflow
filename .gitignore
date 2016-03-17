@@ -3,6 +3,8 @@
 .RData
 *.fa
 *.fna
+*.FNA
 *.fasta
+*.tsv
 wanted_TRS_URLs.txt
 unused_data
