@@ -1,1 +1,0 @@
--SOAPdenovo-Trans-Transrate-stats.tsv.gz
