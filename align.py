@@ -10,7 +10,13 @@ unaligned_orthogroup = cmdln_args.get('<orthogroup_cleaned>')
 orthogroup_name = os.path.splitext(unaligned_orthogroup)[0]
 orthogroup_name = orthogroup_name.rstrip('_cleaned')
 
-muscle_align = MuscleCommandline(input = unaligned_orthogroup, 
-                                 out = orthogroup_name + '_aligned.fasta')
-if __name__ == '__main__':
+file_size = os.path.getsize(unaligned_orthogroup)
+
+if file_size > 0:
+    muscle_align = MuscleCommandline(input = unaligned_orthogroup, 
+                                     out = orthogroup_name + '_aligned.fasta')
     muscle_align()
+    
+elif file_size == 0:
+    print "No orthogroups found for", orthogroup_name
+                                     

@@ -1,9 +1,9 @@
-all: $(patsubst %.FNA, %_aligned.fasta, $(wildcard *.FNA))
+all: $(patsubst %.FAA, %_aligned.fasta, $(wildcard *.FAA))
 
 clean:
 	rm -f *_filtered.fasta *_cleaned.fasta *_aligned.fasta
 
-%_filtered.fasta: %.FNA wanted_species.txt
+%_filtered.fasta: %.FAA wanted_species.txt
 	python filter.py $^
 
 %_cleaned.fasta: %_filtered.fasta
@@ -11,7 +11,7 @@ clean:
 
 %_aligned.fasta : %_cleaned.fasta
 	python align.py $^
-	nohup aliview $@ > /dev/null 2>&1 &
+#	nohup aliview $@ > /dev/null 2>&1 &
 
 
 .PHONY: all clean
