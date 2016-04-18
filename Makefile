@@ -1,24 +1,24 @@
-FAA: $(patsubst %.FAA, %_aligned.fasta, $(wildcard *.FAA))
+FAA: $(patsubst %.FAA, %_aligned.fasta, $(wildcard data/*.FAA))
 
-FNA: $(patsubst %.FNA, %_aligned.fasta, $(wildcard *.FNA))
+FNA: $(patsubst %.FNA, %_aligned.fasta, $(wildcard data/*.FNA))
 
 clean:
 	rm -f *_filtered.fasta *_cleaned.fasta *_aligned.fasta
 
-%_filtered.fasta: %.FAA wanted_species.txt
-	python filter.py $^
+data/%_filtered.fasta: data/%.FAA data/wanted_species.txt
+	python scripts/filter.py $^
 
-%_filtered.fasta: %.FNA wanted_species.txt
-	python filter.py $^
+data/%_filtered.fasta: data/%.FNA data/wanted_species.txt
+	python scripts/filter.py $^
 
-%_cleaned.fasta: %_filtered.fasta
-	python clean.py $^
+data/%_cleaned.fasta: data/%_filtered.fasta
+	python scripts/clean.py $^
 
-%_aligned.fasta : %_cleaned.fasta
-	python align.py $^
+data/%_aligned.fasta : data/%_cleaned.fasta
+	python scripts/align.py $^
 #	nohup aliview $@ > /dev/null 2>&1 &
 
 
 .PHONY: FAA FNA clean
 .DELETE_ON_ERROR:
-.PRECIOUS: %_filtered.fasta %_cleaned.fasta
+.PRECIOUS: data/%_filtered.fasta data/%_cleaned.fasta
