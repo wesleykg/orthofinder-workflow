@@ -3,7 +3,7 @@ FAA: $(patsubst %.FAA, %_aligned.fasta, $(wildcard data/*.FAA))
 FNA: $(patsubst %.FNA, %_aligned.fasta, $(wildcard data/*.FNA))
 
 clean:
-	rm -f *_filtered.fasta *_cleaned.fasta *_aligned.fasta
+	rm -f data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta
 
 data/%_filtered.fasta: data/%.FAA data/wanted_species.txt
 	python scripts/filter.py $^
