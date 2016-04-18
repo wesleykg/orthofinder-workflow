@@ -8,6 +8,9 @@ clean:
 %_filtered.fasta: %.FAA wanted_species.txt
 	python filter.py $^
 
+%_filtered.fasta: %.FNA wanted_species.txt
+	python filter.py $^
+
 %_cleaned.fasta: %_filtered.fasta
 	python clean.py $^
 
