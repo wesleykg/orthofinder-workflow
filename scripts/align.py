@@ -18,5 +18,6 @@ if file_size > 0:
     muscle_align()
     
 elif file_size == 0:
-    print "No orthogroups found for", orthogroup_name
+    with open(orthogroup_name + '_aligned.fasta', 'w') as empty_file:
+        print 'No orthogroups found for', orthogroup_name
                                      

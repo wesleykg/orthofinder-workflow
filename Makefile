@@ -21,4 +21,4 @@ data/%_aligned.fasta : data/%_cleaned.fasta
 
 .PHONY: FAA FNA clean
 .DELETE_ON_ERROR:
-.PRECIOUS: data/%_filtered.fasta data/%_cleaned.fasta
+#.PRECIOUS: data/%_filtered.fasta data/%_cleaned.fasta
