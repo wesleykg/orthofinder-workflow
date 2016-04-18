@@ -1,4 +1,6 @@
-all: $(patsubst %.FAA, %_aligned.fasta, $(wildcard *.FAA))
+FAA: $(patsubst %.FAA, %_aligned.fasta, $(wildcard *.FAA))
+
+FNA: $(patsubst %.FNA, %_aligned.fasta, $(wildcard *.FNA))
 
 clean:
 	rm -f *_filtered.fasta *_cleaned.fasta *_aligned.fasta
@@ -14,6 +16,6 @@ clean:
 #	nohup aliview $@ > /dev/null 2>&1 &
 
 
-.PHONY: all clean
+.PHONY: FAA FNA clean
 .DELETE_ON_ERROR:
 .PRECIOUS: %_filtered.fasta %_cleaned.fasta
