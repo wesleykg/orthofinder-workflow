@@ -2,6 +2,14 @@ FAA: $(patsubst data/%.FAA, data/%_aligned.fasta, $(wildcard data/*.FAA))
 
 FNA: $(patsubst data/%.FNA, data/%_aligned.fasta, $(wildcard data/*.FNA))
 
+data/*.FAA: data/wanted_accesions.txt data/1kp_token.txt
+	cd data/ ; python ../scripts/download.py $(notdir $^)
+	cd data/ ; find . -mindepth 2 -ipath "*.faa" -exec cp {} . \;
+
+data/*.FNA: data/wanted_accesions.txt data/1kp_token.txt
+	cd data/ ; python ../scripts/download.py $(notdir $^)
+	cd data/ ; find . -mindepth 2 -ipath "*.fna" -exec cp {} . \;
+
 data/%_filtered.fasta: data/%.FAA data/wanted_species
 	cd data/ ; python ../scripts/filter.py $(notdir $^)
 
