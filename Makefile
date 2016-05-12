@@ -19,10 +19,10 @@ data/%_aligned.fasta : data/%_cleaned.fasta
 	cd data/ ; python ../scripts/align.py $(notdir $^)
 
 clean:
-	rm data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta
+	rm -f data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta
 
 cleanall:
-	rm data/*.FNA data/*.FAA data/*_filtered.fasta data/*_cleaned.fasta \
+	rm -f data/*.FNA data/*.FAA data/*_filtered.fasta data/*_cleaned.fasta \
 	data/*_aligned.fasta
 
 .PHONY: FAA FNA download clean cleanall

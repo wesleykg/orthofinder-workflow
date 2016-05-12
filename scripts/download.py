@@ -7,8 +7,8 @@ import requests
 
 cmdln_args = docopt(__doc__) # Creates a dictionary of command-line arguments
 
-wanted_accesions = cmdln_args.get('<wanted_accesions>') #"../data/wanted_gene_ids.txt"
-token_file = cmdln_args.get('<token_file>') #'../data/1kp_token.txt'
+wanted_accesions = cmdln_args.get('<wanted_accesions>')
+token_file = cmdln_args.get('<token_file>')
 file_format = 'zip'
 
 base_url = 'http://iptol-api.iplantcollaborative.org/onekp/v1/orthogroups?'
@@ -32,3 +32,5 @@ orthogroup_file = requests.get(URL)
 if orthogroup_file.status_code == requests.codes.ok:
     orthogroup_file = ZipFile(StringIO(orthogroup_file.content))
     orthogroup_file.extractall()
+else:
+    print 'Status code:', orthogroup_file.status_code
