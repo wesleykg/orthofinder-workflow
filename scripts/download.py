@@ -28,8 +28,7 @@ with open(wanted_accessions, 'r') as accessions:
     for line in accessions:
         line = line.rstrip()
         accession_ID_list.append(line)
-    seperator = '+'
-    gene_IDs = seperator.join(accession_ID_list)
+    gene_IDs = '+'.join(accession_ID_list)
     
 URL = (base_url + 'orthogroups?' + 'accession=' + gene_IDs + '&token='
         + token_1kp + '&format=' + file_format)
