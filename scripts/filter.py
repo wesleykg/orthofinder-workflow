@@ -22,13 +22,25 @@ with open(wanted_species_file, 'r') as species_file:
 #Loop through each wanted ID and if it matches with an ID in the orthogroup, 
 #add that sequence record to the list matching_records
 matching_records = []
+matching_record_ids = []
 for record in SeqIO.parse(orthogroup_file, 'fasta'): 
     for ID in wanted_ids: 
         if ID in record.id:
             matching_records.append(record)
+            record_id = record.id
+            record_id = ID.split('-')[0]
+            matching_record_ids.append(record_id)
+
+missing_records = []
+for ID in wanted_ids:
+    if ID not in matching_record_ids:
+        missing_records.append(ID)
+missing_records = '\n'.join(missing_records)
 
 #Write matching_records to file using the original filename and appending
 #_filtered.fasta to the end
 orthogroup_name = os.path.splitext(orthogroup_file)[0]
 SeqIO.write(matching_records, orthogroup_name + '_filtered.fasta',
             format = 'fasta')
+with open(orthogroup_name + '_missing.fasta', 'w') as missing_file:
+    missing_file.write(missing_records)
