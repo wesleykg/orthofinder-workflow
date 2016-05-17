@@ -1,6 +1,6 @@
 '''Usage: filter.py <orthogroup> <wanted_species>'''
 
-from docopt import docopt # or command-line arguments
+from docopt import docopt #For command-line arguments
 import os #For creating output filename from input
 from Bio import SeqIO #For reading orthgroup data
 
