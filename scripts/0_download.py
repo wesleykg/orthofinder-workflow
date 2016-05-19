@@ -16,15 +16,14 @@ base_url = 'http://iptol-api.iplantcollaborative.org/onekp/v1/'
 token_url = base_url + 'login'
 orthogroup_url = base_url + 'orthogroups'
 
-#Connect to the server and obtain an authentication token. Setting ridirection
-#to false stops Requests from redirecting us to the web GUI page
+# Connect to the server and obtain an authentication token. Setting redirection
+# to false stops Requests from redirecting us to the web GUI page
 auth_token = requests.get(token_url, 
                           auth=HTTPDigestAuth('1kp-data', '1kp-rna1'), 
                             allow_redirects = False)
-
 #Use regex to find the token in the returned message from the server
 token_pattern = re.compile('[0-9]{13}_[A-z0-9]{16}')
-auth_token = re.search(token_pattern, auth_token.text)
+auth_token = re.search(token_pattern, auth_token.text) #Method to find the token
 auth_token = auth_token.group() #Method to read the matched regex token
 
 #Open the wanted_accessions file and read in each accession into accession_ids
@@ -34,15 +33,17 @@ with open(wanted_accessions, 'r') as accessions:
     for line in accessions_list:
         line = line.rstrip()
         accession_IDs.append(line)
-    gene_IDs = '+'.join(accession_IDs)
-    
-URL = (orthogroup_url + '?accession=' + gene_IDs + '&token='
-        + auth_token + '&format=' + file_format)
+#Join each accession id into a string seperated by '+' characters
+gene_IDs = '+'.join(accession_IDs)
+  
+#Construct the wanted_url
+wanted_url = (orthogroup_url + '?accession=' + gene_IDs + '&token='
+                + auth_token + '&format=' + file_format)
 
-orthogroup_file = requests.get(URL)
+orthogroup_file = requests.get(wanted_url)
 if orthogroup_file.status_code == requests.codes.ok:
     orthogroup_file = ZipFile(StringIO(orthogroup_file.content))
     orthogroup_file.extractall()
 else:
-    print URL
+    print 'Error using this url:', orthogroup_file.url
     orthogroup_file.raise_for_status()
