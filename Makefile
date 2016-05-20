@@ -16,7 +16,7 @@ data/%_filtered.fasta: data/%.FNA data/wanted_species.txt
 data/%_cleaned.fasta: data/%_filtered.fasta
 	cd data/ ; python ../scripts/2_clean.py $(notdir $^)
 
-data/%_aligned.fasta : data/%_cleaned.fasta
+data/%_aligned.fasta : data/%_cleaned.fasta muscle
 	cd data/ ; python ../scripts/3_align.py $(notdir $^)
 
 clean:
