@@ -21,11 +21,11 @@ data/%_aligned.fasta : data/%_cleaned.fasta muscle
 
 clean:
 	rm -f data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta \
-	data/*_missing.fasta
+	data/*_missing.txt
 
 cleanall:
 	rm -f data/*.FNA data/*.FAA data/*_filtered.fasta data/*_cleaned.fasta \
-	data/*_aligned.fasta data/*_missing.fasta
+	data/*_aligned.fasta data/*_missing.txt
 
 .PHONY: FAA FNA download clean cleanall
 .DELETE_ON_ERROR:
