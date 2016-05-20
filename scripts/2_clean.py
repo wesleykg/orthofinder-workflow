@@ -37,5 +37,5 @@ for record in SeqIO.parse(uncleaned_orthogroup, 'fasta'):
 # Write unique_records to file using the original filename and appending
 # _cleaned.fasta to the end.
 orthogroup_name = os.path.splitext(uncleaned_orthogroup)[0]
-orthogroup_name = orthogroup_name.rstrip('_filtered')
+orthogroup_name = orthogroup_name.rpartition('_')[0]
 SeqIO.write(unique_records, orthogroup_name + '_cleaned.fasta', format='fasta')

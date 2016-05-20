@@ -31,7 +31,7 @@ file_size = os.path.getsize(unaligned_orthogroup)
 
 # Set the original filename
 orthogroup_name = os.path.splitext(unaligned_orthogroup)[0]
-orthogroup_name = orthogroup_name.rstrip('_cleaned')
+orthogroup_name = orthogroup_name.rpartition('_')[0]
 
 # If the file has sequences, initialize the alignment module, set parameters,
 # and execute the alignment program
