@@ -42,7 +42,7 @@ for record in SeqIO.parse(orthogroup_file, 'fasta'):
     for ID in wanted_ids:
         if ID in record.id:
             matching_records.append(record)
-            # Record the ID of matched species in a sperate list for checking
+            # Record the ID of matched species in a seperate list for checking
             # missed species later.
             record_id = record.id
             record_id = ID.split('-')[0]
