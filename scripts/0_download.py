@@ -1,4 +1,4 @@
-'''Usage: download.py <wanted_accessions> <format>'''
+'''Usage: 0_download.py <wanted_accessions> <format>'''
 
 # Modules
 import requests  # Downloading the authentication token and orthogroup files

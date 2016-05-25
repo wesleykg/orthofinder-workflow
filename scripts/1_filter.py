@@ -1,4 +1,4 @@
-'''Usage: filter.py <orthogroup> <wanted_species>'''
+'''Usage: 1_filter.py <orthogroup> <wanted_species>'''
 
 # Modules
 import os  # Manipulating filenames

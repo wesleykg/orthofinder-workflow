@@ -1,4 +1,4 @@
-'''Usage: align.py <orthogroup_cleaned> <method>'''
+'''Usage: 3_align.py <orthogroup_cleaned> <method>'''
 
 # Modules
 import os  # Manipulating filenames

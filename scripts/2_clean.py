@@ -1,4 +1,4 @@
-'''Usage: clean.py <orthogroup_filtered>'''
+'''Usage: 2_clean.py <orthogroup_filtered>'''
 
 # Modules
 import os  # Manipulating filenames
