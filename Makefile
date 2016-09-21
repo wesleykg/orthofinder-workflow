@@ -4,7 +4,7 @@ FNA: $(patsubst data/%.FNA, data/%_aligned.fasta, $(wildcard data/*.FNA))
 
 download:
 	cd data/ ; python ../scripts/0_download.py wanted_accessions.txt zip
-	cd data/ ; find . -mindepth 1 -ipath "*.f?a" -exec mv {} . \;
+	cd data/ ; find . -mindepth 2 -ipath "*.f?a" -exec mv {} . \;
 	cd data/ ; rm -r */
 
 data/%_filtered.fasta: data/%.FAA data/wanted_species.txt
