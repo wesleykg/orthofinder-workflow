@@ -1,4 +1,4 @@
-'''Usage: 4_rename.py <fasta_alignment> <names_file>'''
+'''Usage: 4_rename.py <fasta_alignment> <accessions_file>'''
 
 # Modules
 import pandas
@@ -19,7 +19,7 @@ if in_ipython() is False:
     from docopt import docopt  # Command-line argument handler
     cmdln_args = docopt(__doc__)
     in_alignment = cmdln_args.get('<fasta_alignment>')
-    accessions_file = cmdln_args.get('<names_file>')
+    accessions_file = cmdln_args.get('<accessions_file>')
 # Run interatively in an iPython console
 if in_ipython() is True:
     in_alignment = '../data/ATCG00540_10485_aligned.fasta'

@@ -7,6 +7,9 @@ download:
 	cd data/ ; find . -mindepth 2 -ipath "*.f?a" -exec mv {} . \;
 	cd data/ ; rm -r */
 
+rename:
+	bash scripts/4_rename.sh
+
 data/%_filtered.fasta: data/%.FAA data/wanted_species.txt
 	cd data/ ; python ../scripts/1_filter.py $(notdir $^)
 
