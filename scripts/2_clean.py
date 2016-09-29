@@ -23,12 +23,12 @@ if in_ipython() is False:
 if in_ipython() is True:
     uncleaned_orthogroup = ''
 
-# Create an ID for each record based on the sequence. All records with unique
-# IDs, and therefore unique sequences, are saved to unique_records. Duplicate
-# sequences should not be added.
+# Remove duplicate sequences by creating an ID for each record based on the
+# sequence. All records with unique IDs, and therefore unique sequences, are
+# saved to unique_records. Duplicate sequences should not be added.
 unique_records = []
 checksum_container = []
-for record in SeqIO.parse(uncleaned_orthogroup, format='fasta'):
+for record in SeqIO.parse(uncleaned_orthogroup, form'fasta'):
     checksum = seguid(record.seq)
     if checksum not in checksum_container:
         checksum_container.append(checksum)
