@@ -28,7 +28,7 @@ if in_ipython() is True:
 # saved to unique_records. Duplicate sequences should not be added.
 unique_records = []
 checksum_container = []
-for record in SeqIO.parse(uncleaned_orthogroup, form'fasta'):
+for record in SeqIO.parse(uncleaned_orthogroup, format='fasta'):
     checksum = seguid(record.seq)
     if checksum not in checksum_container:
         checksum_container.append(checksum)
