@@ -28,7 +28,7 @@ if in_ipython() is True:
     file_format = 'zip'
 
 # Location of web API
-base_url = 'http://iptol-api.iplantcollaborative.org/onekp/v1/'
+base_url = 'http://jlmwiki.plantbio.uga.edu/onekp/v2/'
 
 # Connect to the server and obtain an authentication token. Setting
 # allow_redirects to false stops Requests from redirecting us to
