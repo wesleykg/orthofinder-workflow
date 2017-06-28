@@ -24,6 +24,7 @@ data/%_aligned.fasta : data/%_cleaned.fasta
 	then \
 		cd data/ ; muscle -in  $(notdir $^) -out $(notdir $@) ; \
 	fi
+
 clean:
 	rm -f data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta \
 	data/*_missing.txt
