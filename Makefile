@@ -20,8 +20,10 @@ data/%_cleaned.fasta: data/%_filtered.fasta
 	cd data/ ; python ../scripts/2_clean.py $(notdir $^)
 
 data/%_aligned.fasta : data/%_cleaned.fasta
-	cd data/ ; python ../scripts/3_align.py $(notdir $^) muscle
-
+	if [ -s $^ ] ; \
+	then \
+		cd data/ ; muscle -in  $(notdir $^) -out $(notdir $@) ; \
+	fi
 clean:
 	rm -f data/*_filtered.fasta data/*_cleaned.fasta data/*_aligned.fasta \
 	data/*_missing.txt
