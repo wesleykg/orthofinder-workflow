@@ -16,10 +16,10 @@ data/%_filtered.fasta: data/%.FAA data/wanted_species.txt
 data/%_filtered.fasta: data/%.FNA data/wanted_species.txt
 	cd data/ ; python ../scripts/1_filter.py $(notdir $^)
 
-data/%_cleaned.fasta: data/%_filtered.fasta
-	cd data/ ; python ../scripts/2_clean.py $(notdir $^)
+# data/%_cleaned.fasta: data/%_filtered.fasta
+# 	cd data/ ; python ../scripts/2_clean.py $(notdir $^)
 
-data/%_aligned.fasta : data/%_cleaned.fasta
+data/%_aligned.fasta : data/%_filtered.fasta
 	if [ -s $^ ] ; \
 	then \
 		cd data/ ; muscle -in  $(notdir $^) -out $(notdir $@) ; \
